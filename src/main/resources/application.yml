@@ -1,0 +1,73 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: knowledge-assistant
+
+  # Default profile uses Supabase PostgreSQL database
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://db.cpdfuspjmwtyxjzhajkt.supabase.co:5432/postgres?sslmode=require}
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:*rH*6_W4zXrQX&e}
+
+  h2:
+    console:
+      enabled: false
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# Supabase Configuration
+supabase:
+  url: ${SUPABASE_URL:https://cpdfuspjmwtyxjzhajkt.supabase.co}
+  publishable-key: ${SUPABASE_PUBLISHABLE_KEY:sb_publishable_ceqnAPWhy5yYfKugbw1P0g_Igs-9_7c}
+  secret-key: ${SUPABASE_SECRET_KEY:sb_secret_u7V71PODkRTDIRvTOvvi6Q_8nvg4qf8}
+  jwks-url: ${SUPABASE_JWKS_URL:https://cpdfuspjmwtyxjzhajkt.supabase.co/auth/v1/.well-known/jwks.json}
+
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
+# JWT Configuration
+app:
+  jwt:
+    secret: 4b7a2d3e8f1c5a9d6e0b3f7c2a8d1e4f5b9c0a3d6e7f8a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5
+    expiration-ms: 86400000  # 24 hours
+
+# Gemini API Configuration
+gemini:
+  api:
+    key: ${GEMINI_API_KEY:AQ.Ab8RN6K7SAEtAWm-H2ZP6mzJ71hmun83pHgSJYApY1WvpT48fg}
+    model: gemini-3.1-flash-lite
+    url: https://generativelanguage.googleapis.com/v1beta/models
+
+---
+# Production profile
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/knowledgedb
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  h2:
+    console:
+      enabled: false
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
