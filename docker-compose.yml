@@ -7,27 +7,4 @@ services:
       - "8080:8080"
     env_file:
       - .env
-    depends_on:
-      db:
-        condition: service_healthy
     restart: always
-
-  db:
-    image: postgres:15-alpine
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: knowledgedb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d knowledgedb"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    restart: always
-
-volumes:
-  pgdata:
