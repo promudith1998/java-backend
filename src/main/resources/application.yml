@@ -5,12 +5,12 @@ spring:
   application:
     name: knowledge-assistant
 
-  # Default profile uses Supabase PostgreSQL database (via local proxy for Docker/IPv4 compatibility)
+  # Default profile uses Supabase PostgreSQL database (via connection pooler)
   datasource:
-    url: ${DB_URL:jdbc:postgresql://host.docker.internal:54320/postgres?sslmode=require}
+    url: ${DB_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&prepareThreshold=0}
     driver-class-name: org.postgresql.Driver
-    username: ${DB_USERNAME:postgres}
-    password: "${DB_PASSWORD:*rH*6_W4zXrQX&e}"
+    username: ${DB_USERNAME:postgres.cpdfuspjmwtyxjzhajkt}
+    password: "${DB_PASSWORD:0NNi9xnlQcmnE5m2}"
     hikari:
       maximum-pool-size: 3
       minimum-idle: 1
@@ -64,10 +64,10 @@ spring:
       on-profile: prod
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/knowledgedb
+    url: ${DB_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&prepareThreshold=0}
     driver-class-name: org.postgresql.Driver
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:postgres}
+    username: ${DB_USERNAME:postgres.cpdfuspjmwtyxjzhajkt}
+    password: ${DB_PASSWORD:0NNi9xnlQcmnE5m2}
 
   h2:
     console:
