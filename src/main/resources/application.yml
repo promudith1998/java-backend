@@ -10,7 +10,7 @@ spring:
     url: ${DB_URL:jdbc:postgresql://db.cpdfuspjmwtyxjzhajkt.supabase.co:5432/postgres?sslmode=require}
     driver-class-name: org.postgresql.Driver
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:*rH*6_W4zXrQX&e}
+    password: "${DB_PASSWORD:*rH*6_W4zXrQX&e}"
 
   h2:
     console:
@@ -25,17 +25,17 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
 # Supabase Configuration
 supabase:
   url: ${SUPABASE_URL:https://cpdfuspjmwtyxjzhajkt.supabase.co}
   publishable-key: ${SUPABASE_PUBLISHABLE_KEY:sb_publishable_ceqnAPWhy5yYfKugbw1P0g_Igs-9_7c}
   secret-key: ${SUPABASE_SECRET_KEY:sb_secret_u7V71PODkRTDIRvTOvvi6Q_8nvg4qf8}
   jwks-url: ${SUPABASE_JWKS_URL:https://cpdfuspjmwtyxjzhajkt.supabase.co/auth/v1/.well-known/jwks.json}
-
-  servlet:
-    multipart:
-      max-file-size: 5MB
-      max-request-size: 5MB
 
 # JWT Configuration
 app:
